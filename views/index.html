@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Northwind Spa Products</title>
+    <link href="/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular.js"></script>
+  </head>
+  <body ng-app="northwind" ng-controller="add">
+    <div class="container">
+      <div class="entry">
+        <h1>Northwind Spa Products</h1>
+        <form>
+          <fieldset class="form-group">
+            <label for="name">Name</label>
+            <input ng-model="name" type="text" class="form-control" name="name" id="name" placeholder="Enter product name">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="priority">Priority</label>
+            <input ng-model="priority" type="number" class="form-control" name="priority" id="priority" placeholder="Enter priority">
+          </fieldset>
+          <button ng-click="addProduct()" type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      <div class="productList">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th></th>
+              <th style="text-align: right">Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="product in products">
+              <td>{{ product.name }}</td>
+              <td style="text-align: right">
+                <button ng-click="remove(product)" class="btn btn-danger btn-sm pull-right glyphicon glyphicon-remove-circle"></button>
+                <button ng-click="moveDown(product)" ng-show="isNotLast(product)" class="btn btn-primary btn-sm pull-right glyphicon glyphicon-circle-arrow-down"></button>
+                <button ng-click="moveUp(product)" ng-show="isNotFirst(product)" class="btn btn-success btn-sm pull-right glyphicon glyphicon-circle-arrow-up"></button>
+              </td>
+              <td style="text-align: right">{{ product.priority }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </body>
+</html>
