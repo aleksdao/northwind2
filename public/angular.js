@@ -17,7 +17,7 @@ app.controller("add", function($scope, $http, $q) {
     }
     $http.post("/", newProduct)
       .then(function(response) {
-        $scope.display();
+        $scope.products = response.data;
       })
   }
 

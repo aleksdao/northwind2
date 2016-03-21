@@ -31,13 +31,18 @@ app.get("/products", function(req, res, next) {
 
 app.post("/", function(req, res, next) {
   var name = req.body.name;
-  var priority = req.body.priority;
+  if(req.body.priority)
+    priority = req.body.priority;
+  else priority = 5;
   Product.create({
     name: name,
     priority: priority
   })
-    .then(function(product) {
-      res.send(product);
+    .then(function() {
+      return Product.find().sort({priority: 1});
+    })
+    .then(function(products) {
+      res.send(products);
     })
 })
 
