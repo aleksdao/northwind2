@@ -73,6 +73,6 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-app.listen(1337, function(req, res, next) {
+app.listen(process.env.PORT || 1337, function(req, res, next) {
   console.log("server is running");
 })
