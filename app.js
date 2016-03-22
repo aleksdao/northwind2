@@ -1,17 +1,13 @@
 var express = require('express');
 var app = express();
 var path = require("path");
-var swig = require("swig");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
 var db = require("./models/db");
 var Product = db.Product;
 
 app.set("views", path.join(__dirname + "/views"));
-app.set("view engine", "html");
-app.engine("html", swig.renderFile);
 
-swig.setDefaults({ cache: false });
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("combined"));
