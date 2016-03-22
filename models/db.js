@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+//don't hardocde connection string-- use environment variables
 mongoose.connect("mongodb://localhost/northwind2");
 var Schema = mongoose.Schema;
 
@@ -18,6 +19,7 @@ var productSchema = new Schema({
 
 var Product = mongoose.model("product", productSchema);
 
+//how about exporting a method that will allow you to connect to the database...
 module.exports = {
   Product: Product
-}
+};

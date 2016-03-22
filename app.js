@@ -16,20 +16,25 @@ app.use(bodyParser.json());
 
 app.get("/", function(req, res, next) {
   res.sendFile(path.join(__dirname, "/views/index.html"));
-})
+});
 
+//how about using a Router 
 app.get("/products", function(req, res, next) {
   Product.find().sort({priority: 1})
     .then(function(products) {
       res.send(products)
-    })
-})
+    });
+});
 
+//make it RESTful.. should be /products
+//return the inserted product - not all of them
 app.post("/", function(req, res, next) {
   var name = req.body.name;
   if(req.body.priority)
     priority = req.body.priority;
-  else priority = 5;
+  else 
+    priority = 5;//don't you have defaults?
+
   Product.create({
     name: name,
     priority: priority
@@ -39,9 +44,11 @@ app.post("/", function(req, res, next) {
     })
     .then(function(products) {
       res.send(products);
-    })
-})
+    });
+});
 
+//again.. should be /products
+//no need to return anything.. 
 app.delete("/:id", function(req, res, next) {
   Product.findByIdAndRemove(req.params.id)
     .then(function(product) {
@@ -49,9 +56,10 @@ app.delete("/:id", function(req, res, next) {
     })
     .then(function(products) {
       res.send(products);
-    })
-})
+    });
+});
 
+//good but make it RESTful
 app.put("/:id", function(req, res, next) {
   Product.findById(req.params.id)
     .then(function(product) {
@@ -69,6 +77,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
+//how about setting up a server file...
 app.listen(process.env.PORT || 1337, function(req, res, next) {
   console.log("server is running");
 })
